@@ -1,32 +1,47 @@
-// const body = document.body
-// const title_div = document.createElement('div')
-// title_div.textContent = 'Expense Tracker'
-// title_div.className = 'main_title'
+const body = document.body
 
-// body.append(title_div)
+function appendComponent(father, child) {
+    father.append(child)
+}
 
-const body = document.querySelector('body'),
-      sidebar = body.querySelector('nav'),
-      toggle = body.querySelector(".toggle"),
-      searchBtn = body.querySelector(".search-box"),
-      modeSwitch = body.querySelector(".toggle-switch"),
-      modeText = body.querySelector(".mode-text");
+function createSidebarHeader(text) {
+    const header = document.createElement('header')
+    header.textContent = text
+    return header
+}
 
-toggle.addEventListener("click" , () =>{
-    sidebar.classList.toggle("close");
-})
+function createMenuListItem(name) {
+    const list_item = document.createElement('li')
+    list_item.textContent = name
+    return list_item
+}
 
-searchBtn.addEventListener("click" , () =>{
-    sidebar.classList.remove("close");
-})
+function createMenuList() {
+    const menu_list = document.createElement('ul')
+    const items = ['Item 1', 'Item 2', 'Item 3']
+    const list_items = items.map((item) => createMenuListItem(item))
+    list_items.forEach(list_item => {
+        list_item.className = 'side-bar-list-item'
+        appendComponent(menu_list, list_item)
+    });
+    return menu_list
+}
 
-modeSwitch.addEventListener("click" , () =>{
-    body.classList.toggle("dark");
-    
-    if(body.classList.contains("dark")){
-        modeText.innerText = "Light mode";
-    }else{
-        modeText.innerText = "Dark mode";
-        
-    }
-});
+function createSidebar() {
+    // main of sidebar
+    const side_bar = document.createElement('nav')
+    side_bar.className = 'side-bar'
+    const side_bar_header = createSidebarHeader('E.T')
+    appendComponent(side_bar, side_bar_header)
+    const side_bar_menu = createMenuList()
+    appendComponent(side_bar, side_bar_menu)
+    return side_bar
+}
+
+function createComponents(body){
+    side_bar = createSidebar()
+    appendComponent(body, side_bar)
+}
+
+createComponents(body)
+
