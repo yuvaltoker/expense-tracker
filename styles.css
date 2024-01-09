@@ -27,8 +27,11 @@
     --tran-05: all 0.5s ease;
 
     /*===== Sizes =====*/
-    --side-bar-height: 100vh;
-    --side-bar-width: 10vw;
+    --sidebar-height: 100vh;
+    --sidebar-width-open: 15%;
+    --sidebar-width-close: 5%;
+    --content-width-open: 95%;
+    --content-width-close: 85%;
 }
 
 body {
@@ -37,30 +40,57 @@ body {
     transition: var(--tran-05);
 }
 
-.side-bar {
-    background-color: var(--sidebar-background);
-    color: var(--sidebar-color);
-    width: var(--side-bar-width);
-    height: var(--side-bar-height);
+.container {
+    display: flex;
 }
 
-.side-bar header {
+.hover-sidebar .sidebar {
+    width: var(--sidebar-width-open);
+}
+
+.hover-sidebar .content {
+    width: var(--content-width-close);
+}
+
+.hover-content .sidebar {
+    width: var(--sidebar-width-close);
+}
+
+.hover-content .content {
+    width: var(--content-width-open);
+}
+
+
+.sidebar {
+    background-color: var(--sidebar-background);
+    color: var(--sidebar-color);
+    height: var(--sidebar-height);
+    width: var(--sidebar-width-close);
+    transition: var(--tran-04);
+}
+
+.content {
+    width: var(--content-width-open);
+    transition: var(--tran-04);
+}
+
+.sidebar header {
     text-align: center;
 }
 
-.side-bar li {
+.sidebar li {
     background-color: var(--sidebar-list-background);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(var(--side-bar-height) * 1 / 20);
+    height: calc(var(--sidebar-height) * 1 / 20);
     margin-top: 10px;
     font-size: large;
 }
 
-.side-bar li:hover {
+.sidebar li:hover {
     background-color: var(--sidebar-list-hover-background);
     color: var(--sidebar-list-hover-color);
     transition: var(--tran-04);
     font-size: larger;
-}
+} 
