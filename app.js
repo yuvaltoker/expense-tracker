@@ -15,10 +15,29 @@ function createMenuListItem(name) {
     list_item.textContent = name
     list_item.id = name.toLowerCase() + 'Item'
     // Adding event listeners using JavaScript
-    list_item.addEventListener('click', function() {
-        handlePageItemClick(name);
+    list_item.addEventListener('click', () => {
+        list_item.classList.add('click-li')
+        /* 
+        
+        
+        
+        why is this not working?
+        
+        
+        
+        */ 
+        console.log('clicked')})
+    list_item.addEventListener('click', e => {
+        handlePageItemClick(e);
     });
     return list_item
+}
+
+function handlePageItemClick(e) {
+    // getting liItem to be liPage
+    const page_id = e.target.id.slice(0, -4).concat('Page')
+    hideAllPages()
+    showPage(page_id)
 }
 
 function createMenuList(pages_names) {
@@ -45,7 +64,8 @@ function createSidebar(pages_names) {
 function createPage(page_name) {
     const page = document.createElement('div')
     page.textContent = page_name
-    page.id = page_name.toLowerCase() + 'Page'
+    page.id = page_name.toLowerCase().concat('Page')
+    page.name = page_name
     return page
 }
 
@@ -56,14 +76,11 @@ function hideAllPages() {
     }
 }
 
-function showPage(page_name) {
-    const page = document.getElementById(page_name.toLowerCase() + 'Page')
+function showPage(page_id) {
+    const page = document.getElementById(page_id)
+    const content_header = document.getElementById(content_header_id)
+    content_header.textContent = page_id
     page.hidden = false
-}
-
-function handlePageItemClick(page_name) {
-    hideAllPages()
-    showPage(page_name)
 }
 
 function createPages(page_names) {
@@ -78,11 +95,19 @@ function createPages(page_names) {
     return pages
 }
 
+function createContentHeader(header_id) {
+    const header = document.createElement('header')
+    header.id = header_id
+    return header
+}
+
 function createContent(page_names) {
     const content = document.createElement('div')
     content.id = 'content'
     content.className = 'content'
+    const header = createContentHeader(content_header_id)
     const pages = createPages(page_names)
+    appendComponent(content, header)
     appendComponent(content, pages)
     return content
 }
@@ -104,12 +129,19 @@ function createComponents(page_names) {
 
 // pageName must be unique
 const page_names = ['Home', 'About', 'Contact'];
+const content_header_id = 'content-header'
+const content_header_class = 'content-header'
 
 const container = createComponents(page_names)
 body.append(container)
+// get first clean up of pages
+hideAllPages()
+// showPage gets pageID
+showPage(page_names[0].toLowerCase().concat('Page'))
 
 const sidebar = document.querySelector('.sidebar')
 const content = document.querySelector('.content')
+
 
 sidebar.addEventListener('mouseenter', () => container.classList.add('hover-sidebar'))
 sidebar.addEventListener('mouseleave', () => container.classList.remove('hover-sidebar'))

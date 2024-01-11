@@ -13,12 +13,18 @@
 
     /*===== Colors =====*/
     --primary-background: #333333;
-    --sidebar-background: #1b1b1b;
+    /* --sidebar-background: #1b1b1b; */
+    --sidebar-background: black;
+    --content-header-background: #282828;
     --primary-color: #d7d7d7;
     --sidebar-color: #a7a7a7;
     --sidebar-list-background: #351d52;
     --sidebar-list-hover-background: #ffffff;
     --sidebar-list-hover-color: #1b1b1b;
+    --sidebar-list-hover-border-color: black;
+    --sidebar-list-click-background: black;
+    --sidebar-list-click-color: #ffffff;
+    --sidebar-list-click-border-color: #ffffff;
 
     /*===== Transitions =====*/
     --tran-02: all 0.2s ease;
@@ -28,6 +34,7 @@
 
     /*===== Sizes =====*/
     --sidebar-height: 100vh;
+    --content-height: 100vh;
     --sidebar-width-open: 15%;
     --sidebar-width-close: 5%;
     --content-width-open: 95%;
@@ -43,13 +50,13 @@ body {
 
 .container {
     display: flex;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 .pages {
     width: 100%;
-    height: 100%;
+    height: 90%;
 }
 
 .page {
@@ -75,22 +82,39 @@ body {
     width: var(--content-width-open);
 }
 
-
 .sidebar {
     background-color: var(--sidebar-background);
     color: var(--sidebar-color);
-    height: var(--sidebar-height);
+    height: 100%;
     width: var(--sidebar-width-close);
     transition: var(--tran-04);
 }
 
 .content {
     width: var(--content-width-open);
+    height: var(--content-height);
     transition: var(--tran-04);
 }
 
 .sidebar header {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    width: 100%;
+    height: 10%;
+}
+
+.content header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    width: 100%;
+    height: 10%;
+    background-color: var(--content-header-background);
+    color: var(--primary-color);
+
 }
 
 .sidebar li {
@@ -99,13 +123,22 @@ body {
     justify-content: center;
     align-items: center;
     height: calc(var(--sidebar-height) * 1 / 20);
-    margin-top: 10px;
+    /* border: 5px solid black; */
     font-size: large;
+    margin-bottom: 10px;
+    transition: var(--tran-04);
 }
 
 .sidebar li:hover {
     background-color: var(--sidebar-list-hover-background);
     color: var(--sidebar-list-hover-color);
+    border: 15px solid var(--sidebar-list-hover-border-color);
     transition: var(--tran-04);
     font-size: larger;
-} 
+}
+
+.sidebar-list-item .click-li {
+    background-color: var(--sidebar-list-click-background);
+    color: var(--sidebar-list-click-color);
+    border: 15px solid var(--sidebar-list-click-border-color);
+}
