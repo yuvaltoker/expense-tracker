@@ -107,12 +107,9 @@ const page_names = ['Home', 'About', 'Contact'];
 
 const container = createComponents(page_names)
 body.append(container)
-// hideAllPages()
-// showPage(page_names[1])
 
 const sidebar = document.querySelector('.sidebar')
 const content = document.querySelector('.content')
-//const container = document.querySelector('.container')
 
 sidebar.addEventListener('mouseenter', () => container.classList.add('hover-sidebar'))
 sidebar.addEventListener('mouseleave', () => container.classList.remove('hover-sidebar'))
